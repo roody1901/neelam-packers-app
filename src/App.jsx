@@ -306,7 +306,7 @@ export default function App() {
         <div style={{ maxWidth: 740, margin: "0 auto", position: "relative" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(234,88,12,0.15)", border: "1px solid rgba(234,88,12,0.3)", borderRadius: 99, padding: "6px 16px", marginBottom: 28 }}>
             <Star size={14} color="#fb923c" fill="#fb923c" />
-            <span style={{ color: "#fb923c", fontSize: 13, fontWeight: 600 }}>Trusted by 10,000+ families across India</span>
+            <span style={{ color: "#fb923c", fontSize: 13, fontWeight: 600 }}>Trusted by 4500+ families across India</span>
           </div>
           <h1 style={{ fontSize: "clamp(36px,6vw,62px)", fontWeight: 900, color: "#fff", margin: "0 0 20px", lineHeight: 1.1 }}>
             Move Anywhere,<br /><span style={{ color: "#fb923c" }}>Stress-Free.</span>
@@ -323,7 +323,7 @@ export default function App() {
             </a>
           </div>
           <div style={{ display: "flex", gap: 32, justifyContent: "center", marginTop: 56, flexWrap: "wrap" }}>
-            {[["10K+","Happy Customers"],["15+","Years Experience"],["500+","Cities Covered"],["100%","Insured Goods"]].map(([v, l], i) => (
+            {[["4500K+","Happy Customers"],["10+","Years Experience"],["500+","Cities Covered"],["100%","Insured Goods"]].map(([v, l], i) => (
               <div key={i} style={{ textAlign: "center" }}>
                 <div style={{ fontSize: 28, fontWeight: 900, color: "#fb923c" }}>{v}</div>
                 <div style={{ fontSize: 13, color: "#64748b", marginTop: 2 }}>{l}</div>
