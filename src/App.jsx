@@ -20,9 +20,9 @@ const CONFIG = {
     address: "Transport Nagar, Kanpur, Uttar Pradesh",
   },
   emailjs: {
-    serviceId:  "YOUR_EMAILJS_SERVICE_ID",   // https://emailjs.com → Email Services
-    templateId: "YOUR_EMAILJS_TEMPLATE_ID",  // EmailJS → Email Templates
-    publicKey:  "YOUR_EMAILJS_PUBLIC_KEY",   // EmailJS → Account → Public Key
+    serviceId:  "service_dmpbeai",   // https://emailjs.com → Email Services
+    templateId: "template_rg84cqq",  // EmailJS → Email Templates
+    publicKey:  "zpX7WCwFeEbucEl_y",   // EmailJS → Account → Public Key
   },
   callmebot: {
     adminPhone: "919876543210",              // Country code + number, no +
