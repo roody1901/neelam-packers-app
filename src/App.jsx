@@ -323,7 +323,7 @@ export default function App() {
             </a>
           </div>
           <div style={{ display: "flex", gap: 32, justifyContent: "center", marginTop: 56, flexWrap: "wrap" }}>
-            {[["4500K+","Happy Customers"],["10+","Years Experience"],["500+","Cities Covered"],["100%","Insured Goods"]].map(([v, l], i) => (
+            {[["4500+","Happy Customers"],["10+","Years Experience"],["500+","Cities Covered"],["100%","Insured Goods"]].map(([v, l], i) => (
               <div key={i} style={{ textAlign: "center" }}>
                 <div style={{ fontSize: 28, fontWeight: 900, color: "#fb923c" }}>{v}</div>
                 <div style={{ fontSize: 13, color: "#64748b", marginTop: 2 }}>{l}</div>
