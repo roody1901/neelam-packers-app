@@ -14,10 +14,10 @@ const CONFIG = {
     name: "Neelam",
     fullName: "Neelam Packers & Movers",
     tagline: "Packers & Movers",
-    phone: "+91 98765 43210",
-    email: "hello@neelampackers.in",
-    whatsappDisplay: "+91 98765 43210",
-    address: "Transport Nagar, Kanpur, Uttar Pradesh",
+    phone: "+917518314098",
+    email: "neelampackers798@gmail.com",
+    whatsappDisplay: "+917518314098",
+    address: "Goppur,Gopiganj-Mirzapur Road, Uttar Pradesh - 221303",
   },
   emailjs: {
     serviceId:  "service_dmpbeai",   // https://emailjs.com → Email Services
@@ -25,7 +25,7 @@ const CONFIG = {
     publicKey:  "zpX7WCwFeEbucEl_y",   // EmailJS → Account → Public Key
   },
   callmebot: {
-    adminPhone: "919876543210",              // Country code + number, no +
+    adminPhone: "917518314098",              // Country code + number, no +
     apiKey:     "YOUR_CALLMEBOT_API_KEY",    // See setup guide inside app
   },
   googleSheets: {
