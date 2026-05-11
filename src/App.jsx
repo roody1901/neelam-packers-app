@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Truck, Package, Home, Building, Car, Globe, Phone, Mail, MapPin,
-  CheckCircle, AlertCircle, Settings, X, Calendar, Shield, Clock,
-  Star, ArrowRight, ChevronRight, Warehouse, Send, MessageSquare,
-  User, Info, Copy, Check, ExternalLink, Menu
+  CheckCircle, AlertCircle, Settings, X, Shield, Clock,
+  Star, ArrowRight, Warehouse, Send, MessageSquare,
+  Copy, Check
 } from "lucide-react";
 
 // ═══════════════════════════════════════════════════════════════
@@ -17,19 +17,19 @@ const CONFIG = {
     phone: "+917518314098",
     email: "neelampackers798@gmail.com",
     whatsappDisplay: "+917518314098",
-    address: "Goppur,Gopiganj-Mirzapur Road, Uttar Pradesh - 221303",
+    address: "Goppur, Gopiganj-Mirzapur Road, Uttar Pradesh - 221303",
   },
   emailjs: {
-    serviceId:  "service_dmpbeai",   // https://emailjs.com → Email Services
-    templateId: "template_rg84cqq",  // EmailJS → Email Templates
-    publicKey:  "zpX7WCwFeEbucEl_y",   // EmailJS → Account → Public Key
+    serviceId:  "service_dmpbeai",
+    templateId: "template_rg84cqq",
+    publicKey:  "zpX7WCwFeEbucEl_y",
   },
   callmebot: {
-    adminPhone: "917518314098",              // Country code + number, no +
-    apiKey:     "YOUR_CALLMEBOT_API_KEY",    // See setup guide inside app
+    adminPhone: "917518314098",
+    apiKey:     "YOUR_CALLMEBOT_API_KEY",
   },
   googleSheets: {
-    webhookUrl: "YOUR_APPS_SCRIPT_DEPLOY_URL", // See setup guide inside app
+    webhookUrl: "YOUR_APPS_SCRIPT_DEPLOY_URL",
   },
 };
 
@@ -56,7 +56,7 @@ const SETUP_STEPS = [
     steps: [
       "Go to emailjs.com → Sign up free",
       "Add an Email Service (Gmail/Outlook) → copy Service ID",
-      'Create a Template — use variables like {{from_name}}, {{phone}}, {{from_city}}, {{to_city}}, {{move_date}}, {{message}} → copy Template ID',
+      "Create a Template — use variables like {{from_name}}, {{phone}}, {{from_city}}, {{to_city}}, {{move_date}}, {{message}} → copy Template ID",
       "Account → General → copy Public Key",
       "Paste all 3 values in CONFIG.emailjs above",
     ],
@@ -65,10 +65,10 @@ const SETUP_STEPS = [
     label: "CallMeBot (free WhatsApp alerts)",
     color: "#22c55e",
     steps: [
-      "Save +34 644 597 290 as a contact on WhatsApp",
+      "Save +34 698 28 89 73 as a contact on WhatsApp (updated number)",
       'Send this exact message: "I allow callmebot to send me messages"',
       "You'll receive your API key in ~1 minute via WhatsApp",
-      "Set CONFIG.callmebot.adminPhone = your number with country code (e.g. 919876543210)",
+      "If no reply after 2 mins, try again after 24 hours",
       "Set CONFIG.callmebot.apiKey = the key you received",
     ],
   },
@@ -76,20 +76,20 @@ const SETUP_STEPS = [
     label: "Google Sheets (data storage)",
     color: "#f59e0b",
     steps: [
-      "Create a Google Sheet with columns: Timestamp, Type, Name, Phone, Email, From, To, Date, Move Type, Size, Message",
-      "In the Sheet: Extensions → Apps Script → paste the script from the code comment below",
+      "Open your Google Sheet → Extensions → Apps Script (must open from inside the Sheet)",
+      "Delete existing code and paste the script below",
       "Click Deploy → New Deployment → Type: Web App → Execute as: Me → Who has access: Anyone",
-      "Copy the Web App URL",
-      "Paste it in CONFIG.googleSheets.webhookUrl",
+      "Click Authorize → Allow",
+      "Copy the Web App URL and paste in CONFIG.googleSheets.webhookUrl",
     ],
-    note: "Apps Script code: paste in script editor:\nfunction doGet(e){var ss=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();var p=e.parameter;ss.appendRow([new Date(),p.type||'',p.name||'',p.phone||'',p.email||'',p.fromCity||'',p.toCity||'',p.moveDate||'',p.moveType||'',p.propertySize||'',p.message||'']);return ContentService.createTextOutput('OK');}",
+    note: "function doGet(e){var ss=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();var p=e.parameter;ss.appendRow([new Date(),p.type||'',p.name||'',p.phone||'',p.email||'',p.fromCity||'',p.toCity||'',p.moveDate||'',p.moveType||'',p.propertySize||'',p.message||'']);return ContentService.createTextOutput('OK');}",
   },
 ];
 
 function isConfigured(key) {
-  if (key === "emailjs") return !CONFIG.emailjs.serviceId.startsWith("YOUR");
+  if (key === "emailjs")   return !CONFIG.emailjs.serviceId.startsWith("YOUR");
   if (key === "callmebot") return !CONFIG.callmebot.apiKey.startsWith("YOUR");
-  if (key === "sheets") return !CONFIG.googleSheets.webhookUrl.startsWith("YOUR");
+  if (key === "sheets")    return !CONFIG.googleSheets.webhookUrl.startsWith("YOUR");
   return false;
 }
 
@@ -148,7 +148,7 @@ function CopyButton({ text }) {
 function SetupGuide({ onClose }) {
   return (
     <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", zIndex: 1000, display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "24px 16px", overflowY: "auto" }}>
-      <div style={{ background: "#fff", borderRadius: 16, maxWidth: 680, width: "100%", boxShadow: "0 25px 60px rgba(0,0,0,0.25)", position: "relative" }}>
+      <div style={{ background: "#fff", borderRadius: 16, maxWidth: 680, width: "100%", boxShadow: "0 25px 60px rgba(0,0,0,0.25)" }}>
         <div style={{ padding: "24px 28px 0", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
             <h2 style={{ fontSize: 20, fontWeight: 700, color: "#111827", margin: 0 }}>Integration Setup Guide</h2>
@@ -158,7 +158,6 @@ function SetupGuide({ onClose }) {
             <X size={18} />
           </button>
         </div>
-
         <div style={{ padding: "20px 28px 28px", display: "flex", flexDirection: "column", gap: 20 }}>
           {SETUP_STEPS.map((s, i) => (
             <div key={i} style={{ border: "1px solid #e5e7eb", borderRadius: 12, overflow: "hidden" }}>
@@ -175,13 +174,12 @@ function SetupGuide({ onClose }) {
                 {s.note && (
                   <div style={{ marginTop: 12, background: "#1e293b", borderRadius: 8, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
                     <code style={{ fontSize: 11, color: "#94a3b8", whiteSpace: "pre-wrap", lineHeight: 1.6, fontFamily: "monospace" }}>{s.note}</code>
-                    <CopyButton text={s.note.replace("Apps Script code: paste in script editor:\n", "")} />
+                    <CopyButton text={s.note} />
                   </div>
                 )}
               </div>
             </div>
           ))}
-
           <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 10, padding: "14px 16px", fontSize: 13, color: "#166534" }}>
             <strong>✓ Once all 3 are configured</strong>, every form submission will: save to your Google Sheet, email you, and send a WhatsApp notification — all automatically.
           </div>
@@ -193,20 +191,21 @@ function SetupGuide({ onClose }) {
 
 // ─── Main App ──────────────────────────────────────────────────
 export default function App() {
-  const [tab, setTab] = useState("book");
-  const [status, setStatus] = useState("idle");
+  const [tab, setTab]             = useState("book");
+  const [status, setStatus]       = useState("idle");
   const [showSetup, setShowSetup] = useState(false);
-  const [mobileMenu, setMobileMenu] = useState(false);
-  const [form, setForm] = useState({
+  const [form, setForm]           = useState({
     name: "", phone: "", email: "",
     fromCity: "", toCity: "", moveDate: "",
     moveType: "home", propertySize: "2bhk",
     notes: "", message: "",
   });
 
-  const set = (k) => (e) => setForm((p) => ({ ...p, [k]: e.target.value }));
+  // ── Admin: only visible at yoursite.com/?admin ──────────────
+  const isAdmin = typeof window !== "undefined" && window.location.search.includes("admin");
 
-  const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); setMobileMenu(false); };
+  const set      = (k) => (e) => setForm((p) => ({ ...p, [k]: e.target.value }));
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   const handleSubmit = async () => {
     const isBook = tab === "book";
@@ -246,8 +245,6 @@ export default function App() {
     setForm({ name: "", phone: "", email: "", fromCity: "", toCity: "", moveDate: "", moveType: "home", propertySize: "2bhk", notes: "", message: "" });
   };
 
-  const configured = ["emailjs","callmebot","sheets"].filter(k => isConfigured(k)).length;
-
   return (
     <>
       <style>{`
@@ -268,7 +265,7 @@ export default function App() {
         .tab-btn.inactive:hover { background: #e5e7eb; }
         .service-card { background: #fff; border: 1.5px solid #f3f4f6; border-radius: 14px; padding: 24px; transition: all 0.2s; cursor: default; }
         .service-card:hover { border-color: #fdba74; box-shadow: 0 8px 24px rgba(234,88,12,0.1); transform: translateY(-2px); }
-        .nav-link { background: none; border: none; font-family: 'Outfit',sans-serif; font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.85); cursor: pointer; padding: 8px 4px; transition: color 0.15s; text-decoration: none; }
+        .nav-link { background: none; border: none; font-family: 'Outfit',sans-serif; font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.85); cursor: pointer; padding: 8px 4px; transition: color 0.15s; }
         .nav-link:hover { color: #fff; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in { animation: fadeIn 0.35s ease both; }
@@ -287,17 +284,18 @@ export default function App() {
               {CONFIG.company.name}<span style={{ color: "#fb923c", fontWeight: 400, fontSize: 13, marginLeft: 4 }}>Packers & Movers</span>
             </span>
           </div>
-
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             {["Services","How It Works","Book Now"].map((l, i) => (
               <button key={i} className="nav-link" onClick={() => scrollTo(["services","how-it-works","booking"][i])}>
                 {l}
               </button>
             ))}
-            <button onClick={() => setShowSetup(true)} title="Setup Integrations" style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", marginLeft: 8, position: "relative" }}>
-              <Settings size={16} color="#fff" />
-              {configured < 3 && <span style={{ position: "absolute", top: 4, right: 4, width: 7, height: 7, background: "#f59e0b", borderRadius: "50%", border: "1px solid #0f172a" }} />}
-            </button>
+            {/* Only visible at /?admin */}
+            {isAdmin && (
+              <button onClick={() => setShowSetup(true)} title="Setup Integrations" style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", marginLeft: 8, position: "relative" }}>
+                <Settings size={16} color="#fff" />
+              </button>
+            )}
           </div>
         </div>
       </nav>
@@ -320,11 +318,10 @@ export default function App() {
             <button className="swift-btn" style={{ fontSize: 16, padding: "14px 32px" }} onClick={() => scrollTo("booking")}>
               Get Free Quote <ArrowRight size={18} />
             </button>
-            <a href={`tel:${CONFIG.company.phone}`} style={{ display: "flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "14px 28px", color: "#fff", textDecoration: "none", fontWeight: 600, fontSize: 15, transition: "background 0.15s" }}>
+            <a href={`tel:${CONFIG.company.phone}`} style={{ display: "flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "14px 28px", color: "#fff", textDecoration: "none", fontWeight: 600, fontSize: 15 }}>
               <Phone size={17} /> {CONFIG.company.phone}
             </a>
           </div>
-
           <div style={{ display: "flex", gap: 32, justifyContent: "center", marginTop: 56, flexWrap: "wrap" }}>
             {[["10K+","Happy Customers"],["15+","Years Experience"],["500+","Cities Covered"],["100%","Insured Goods"]].map(([v, l], i) => (
               <div key={i} style={{ textAlign: "center" }}>
@@ -400,8 +397,7 @@ export default function App() {
           </div>
 
           <div style={{ background: "#fff", borderRadius: 20, overflow: "hidden", boxShadow: "0 25px 60px rgba(0,0,0,0.35)" }}>
-            {/* Tabs */}
-            <div style={{ display: "flex", gap: 8, padding: "20px 24px 0", borderBottom: "1px solid #f3f4f6", paddingBottom: 16 }}>
+            <div style={{ display: "flex", gap: 8, padding: "20px 24px 16px", borderBottom: "1px solid #f3f4f6" }}>
               <button className={`tab-btn ${tab === "book" ? "active" : "inactive"}`} onClick={() => { setTab("book"); setStatus("idle"); }}>
                 🚛 Book a Move
               </button>
@@ -418,8 +414,7 @@ export default function App() {
                   </div>
                   <h3 style={{ fontSize: 22, fontWeight: 800, color: "#111827", margin: "0 0 10px" }}>Request Received!</h3>
                   <p style={{ color: "#6b7280", fontSize: 15, marginBottom: 28 }}>
-                    Thank you! We've saved your details and our team will contact you within 2 hours.
-                    {isConfigured("emailjs") && " A confirmation has been sent to your email."}
+                    Thank you! Our team will contact you within 2 hours.
                   </p>
                   <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                     <button className="swift-btn" onClick={resetForm}>Submit Another</button>
@@ -439,7 +434,6 @@ export default function App() {
                 </div>
               ) : (
                 <div className="fade-in" key={tab}>
-                  {/* Common Fields */}
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                     <div>
                       <label style={{ fontSize: 13, fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Full Name *</label>
@@ -506,14 +500,6 @@ export default function App() {
                     </div>
                   )}
 
-                  {/* Integration Status Banner */}
-                  {configured < 3 && (
-                    <div style={{ marginTop: 16, background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "10px 14px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
-                      <span style={{ fontSize: 13, color: "#92400e" }}>⚙️ {configured}/3 integrations configured — data may not reach you yet.</span>
-                      <button onClick={() => setShowSetup(true)} style={{ background: "none", border: "none", color: "#ea580c", fontWeight: 700, fontSize: 13, cursor: "pointer", whiteSpace: "nowrap" }}>Setup →</button>
-                    </div>
-                  )}
-
                   <button className="swift-btn" style={{ marginTop: 20, width: "100%", justifyContent: "center", fontSize: 16 }} onClick={handleSubmit} disabled={status === "loading"}>
                     {status === "loading"
                       ? <><div className="spinner" /> Submitting...</>
@@ -529,9 +515,14 @@ export default function App() {
 
           {/* Quick contact */}
           <div style={{ display: "flex", gap: 16, marginTop: 24, justifyContent: "center", flexWrap: "wrap" }}>
-            {[[Phone, CONFIG.company.phone, `tel:${CONFIG.company.phone}`],[Mail, CONFIG.company.email, `mailto:${CONFIG.company.email}`],[MessageSquare, "WhatsApp Us", `https://wa.me/${CONFIG.callmebot.adminPhone}`]].map(([Icon, label, href], i) => (
+            {[
+              [Phone, CONFIG.company.phone, `tel:${CONFIG.company.phone}`],
+              [Mail, CONFIG.company.email, `mailto:${CONFIG.company.email}`],
+              [MessageSquare, "WhatsApp Us", `https://wa.me/917518314098?text=Hi%20Neelam%20Packers%2C%20I%20need%20a%20quote%20for%20my%20move!`],
+            ].map(([Icon, label, href], i) => (
               <a key={i} href={href} style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.7)", fontSize: 14, textDecoration: "none", transition: "color 0.15s" }}
-                onMouseEnter={e => e.currentTarget.style.color = "#fb923c"} onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.7)"}>
+                onMouseEnter={e => e.currentTarget.style.color = "#fb923c"}
+                onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.7)"}>
                 <Icon size={15} />{label}
               </a>
             ))}
@@ -564,9 +555,12 @@ export default function App() {
           </div>
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 20, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
             <span style={{ color: "#475569", fontSize: 13 }}>© {new Date().getFullYear()} {CONFIG.company.fullName}. All rights reserved.</span>
-            <button onClick={() => setShowSetup(true)} style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 6, padding: "5px 14px", color: "#475569", fontSize: 12, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
-              <Settings size={12} /> Admin Setup
-            </button>
+            {/* Only visible at /?admin */}
+            {isAdmin && (
+              <button onClick={() => setShowSetup(true)} style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 6, padding: "5px 14px", color: "#475569", fontSize: 12, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+                <Settings size={12} /> Admin Setup
+              </button>
+            )}
           </div>
         </div>
       </footer>
